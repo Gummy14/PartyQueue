@@ -1,32 +1,23 @@
 <template>
   <v-container>
     <v-layout>
-      <iframe width="879" height="494" :src="topOfQueue" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-      <v-card></v-card>
+      <top-of-queue></top-of-queue>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import TopOfQueue from './TopOfQueue'
 export default {
   name: 'home',
+  components: {
+    TopOfQueue
+  },
   data () {
     return {
       topOfQueue: ''
     }
-  },
-  computed: {
-    ...mapState({youtubeEmbedLink: 'topOfQueue'}),
-  },
-  watch: {
-    youtubeEmbedLink (val) {
-      this.topOfQueue = val
-    }
-  },
+  }
 }
+
 </script>
-
-<style>
-
-</style>

@@ -9,9 +9,9 @@
       <v-text-field
         placeholder="Enter a YouTube URL"
         v-model="youtubeURL"
-        @keypress.native.enter="getURL(youtubeURL)"
+        @keypress.native.enter="getURL()"
       ></v-text-field>
-      <v-btn v-on:click="getURL(youtubeURL)">Add To Queue</v-btn>
+      <v-btn v-on:click="getURL()" :loading="isLoading">Add To Queue</v-btn>
       <v-spacer></v-spacer>
       <v-btn
         flat
@@ -37,18 +37,24 @@ export default {
   },
   data () {
     return {
-      youtubeURL: ''
+      youtubeURL: '',
+      isLoading: false
     }
   },
   methods: {
-    getURL (youtubeURL) {
+    getURL () {
+      console.log('isLoading', this.isLoading)
+      this.isLoading = true
+      console.log('isLoading', this.isLoading)
       var youtubeEmbedTemplate = 'https://www.youtube.com/embed/'
-      var youtubeVideoID = youtubeURL.substring(32,43)
+      var youtubeVideoID = this.youtubeURL.substring(32,43)
       var autoplay = '?autoplay=1'
       var topOfQueue = youtubeEmbedTemplate.concat(youtubeVideoID.concat(autoplay))
       this.$store.commit('setTopOfQueue', {
         TopOfQueue: topOfQueue
       })
+      this.isLoading = false
+      this.youtubeURL = ''
     }
   }
 }
