@@ -1,31 +1,55 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app dark>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>PARTY</span>
+        <span class="font-weight-light">QUEUE</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-text-field
+        placeholder="Enter a YouTube URL"
+        v-model="youtubeURL"
+        @keypress.native.enter="getURL(youtubeURL)"
+      ></v-text-field>
+      <v-btn v-on:click="getURL(youtubeURL)">Add To Queue</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn
+        flat
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+      >
+        <span class="mr-2">Latest Release</span>
+      </v-btn>
+    </v-toolbar>
+
+    <v-content>
+      <Home/>
+    </v-content>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Home from './components/Home'
+export default {
+  name: 'App',
+  components: {
+    Home
+  },
+  data () {
+    return {
+      youtubeURL: ''
+    }
+  },
+  methods: {
+    getURL (youtubeURL) {
+      var youtubeEmbedTemplate = 'https://www.youtube.com/embed/'
+      var youtubeVideoID = youtubeURL.substring(32,43)
+      var autoplay = '?autoplay=1'
+      var topOfQueue = youtubeEmbedTemplate.concat(youtubeVideoID.concat(autoplay))
+      this.$store.commit('setTopOfQueue', {
+        TopOfQueue: topOfQueue
+      })
+    }
+  }
 }
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
