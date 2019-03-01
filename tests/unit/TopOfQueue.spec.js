@@ -10,6 +10,7 @@ localVue.use(Vuex)
 describe('TopOfQueue.vue', () => {
   let wrapper
   let store
+  let subject
 
   beforeEach(() => {
     store = new Vuex.Store({
@@ -18,9 +19,12 @@ describe('TopOfQueue.vue', () => {
       }
     })
     wrapper = shallowMount(TopOfQueue, { store, localVue })
+    subject = wrapper.vm
   })
 
-  it('renders the top of queue component', () => {
-    expect(wrapper.find('.embededVideo').exists()).to.be.true
+  context('template', () => {
+    it('renders the top of queue component', () => {
+      expect(wrapper.find('.embededVideo').exists()).to.be.true
+    })
   })
 })

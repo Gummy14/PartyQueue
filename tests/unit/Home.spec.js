@@ -10,15 +10,19 @@ localVue.use(Vuex)
 describe('Home.vue', () => {
   let wrapper
   let store
+  let subject
 
   beforeEach(() => {
     store = new Vuex.Store({
       state: {}
     })
     wrapper = shallowMount(Home, { store, localVue })
+    subject = wrapper.vm
   })
 
-  it('renders top of queue component', () => {
-    expect(wrapper.find('.top-of-queue').exists()).to.be.true
+  context('template', () => {
+    it('renders top of queue component', () => {
+      expect(wrapper.find('.top-of-queue').exists()).to.be.true
+    })
   })
 })

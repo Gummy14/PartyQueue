@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-toolbar app>
+    <v-toolbar class="toolbar" app>
       <v-toolbar-title class="headline text-uppercase">
         <span>PARTY</span>
         <span class="font-weight-light">QUEUE</span>
@@ -11,7 +11,7 @@
         v-model="youtubeURL"
         @keypress.native.enter="getURL()"
       ></v-text-field>
-      <v-btn v-on:click="getURL()" :loading="isLoading">Add To Queue</v-btn>
+      <v-btn class="add-to-queue" v-on:click="getURL()" :loading="isLoading">Add To Queue</v-btn>
       <v-spacer></v-spacer>
       <v-btn
         flat
@@ -23,7 +23,7 @@
     </v-toolbar>
 
     <v-content>
-      <Home/>
+      <Home class="home"></Home>
     </v-content>
   </v-app>
 </template>
