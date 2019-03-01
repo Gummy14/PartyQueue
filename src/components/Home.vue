@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout>
-      <top-of-queue></top-of-queue>
+      <top-of-queue class="top-of-queue"></top-of-queue>
     </v-layout>
   </v-container>
 </template>

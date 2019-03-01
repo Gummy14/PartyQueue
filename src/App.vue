@@ -43,9 +43,7 @@ export default {
   },
   methods: {
     getURL () {
-      console.log('isLoading', this.isLoading)
       this.isLoading = true
-      console.log('isLoading', this.isLoading)
       var youtubeEmbedTemplate = 'https://www.youtube.com/embed/'
       var youtubeVideoID = this.youtubeURL.substring(32,43)
       var autoplay = '?autoplay=1'
