@@ -9,9 +9,9 @@
       <v-text-field
         placeholder="Enter a YouTube URL"
         v-model="youtubeURL"
-        @keypress.native.enter="getURL()"
+        @keypress.native.enter="loadURL()"
       ></v-text-field>
-      <v-btn class="add-to-queue" v-on:click="getURL()" :loading="isLoading">Add To Queue</v-btn>
+      <v-btn class="add-to-queue" v-on:click="loadURL()" :loading="isLoading">Add To Queue</v-btn>
       <v-spacer></v-spacer>
       <v-btn
         flat
@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    getURL () {
+    loadURL () {
       this.isLoading = true
       var youtubeEmbedTemplate = 'https://www.youtube.com/embed/'
       var youtubeVideoID = this.youtubeURL.substring(32,43)

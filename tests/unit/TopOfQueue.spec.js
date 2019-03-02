@@ -15,7 +15,7 @@ describe('TopOfQueue.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       state: {
-        youtubeEmbedLink: 'https://www.youtube.com/embed/zKFzKIa_pIM'
+        topOfQueue: 'https://www.youtube.com/embed/zKFzKIa_pIM'
       }
     })
     wrapper = shallowMount(TopOfQueue, { store, localVue })
