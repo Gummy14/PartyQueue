@@ -20,6 +20,18 @@ describe('App.vue', () => {
     store = new Vuex.Store({
       state: {
         topOfQueue: ''
+      },
+      mutations: {
+        setTopOfQueue (state, payload) {
+          state.topOfQueue = payload.TopOfQueue
+        }
+      },
+      actions: {
+      },
+      getters: {
+        getTopOfQueue (state) {
+          return state.topOfQueue
+        }
       }
     })
     wrapper = shallowMount(App, { store, localVue })
@@ -47,7 +59,6 @@ describe('App.vue', () => {
       it('saves the url to the store', () => {
         subject.youtubeURL = 'https://www.youtube.com/watch?v=m6sYFUTDiT4'
         subject.loadURL()
-        console.log('store.state.topOfQueue', store.state.topOfQueue)
         expect(store.state.topOfQueue).to.be.equal('https://www.youtube.com/embed/m6sYFUTDiT4?autoplay=1')
       })
     })
