@@ -9,9 +9,9 @@
       <v-text-field
         placeholder="Enter a YouTube URL"
         v-model="youtubeURL"
-        @keypress.native.enter="loadURL()"
+        @keypress.native.enter="addVideoToQueue()"
       ></v-text-field>
-      <v-btn class="add-to-queue" v-on:click="loadURL()" :loading="isLoading">Add To Queue</v-btn>
+      <v-btn class="add-to-queue" v-on:click="addVideoToQueue()" :loading="isLoading">Add To Queue</v-btn>
       <v-spacer></v-spacer>
       <v-btn
         flat
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import GetTitle from './components/GetTitle'
 import Home from './components/Home'
 export default {
   name: 'App',
@@ -38,21 +39,48 @@ export default {
   data () {
     return {
       youtubeURL: '',
-      isLoading: false
+      isLoading: false,
+      videoTitle: ''
     }
   },
   methods: {
-    loadURL () {
+    addVideoToQueue () {
       this.isLoading = true
+      var queue = this.$store.getters.getQueue
+
       var youtubeEmbedTemplate = 'https://www.youtube.com/embed/'
       var youtubeVideoID = this.youtubeURL.substring(32,43)
-      var autoplay = '?autoplay=1'
-      var topOfQueue = youtubeEmbedTemplate.concat(youtubeVideoID.concat(autoplay))
-      this.$store.commit('setTopOfQueue', {
-        TopOfQueue: topOfQueue
+      var autoplay
+
+      if(queue.length === 0) {
+        autoplay = '?autoplay=1'
+      } else {
+        autoplay = ''
+      }
+
+      var newQueueURL = youtubeEmbedTemplate.concat(youtubeVideoID.concat(autoplay))
+
+      GetTitle({
+        apiKey: this.$store.getters.getApiKey,
+        videoId: youtubeVideoID
+      }, 
+      response => {
+        this.videoTitle = response
+
+        var newQueueObject = {
+          url: newQueueURL,
+          title: this.videoTitle
+        }
+
+        queue.push(newQueueObject)
+      
+        this.$store.commit('setQueue', {
+          Queue: queue
+        })
+        
+        this.isLoading = false
+        this.youtubeURL = ''
       })
-      this.isLoading = false
-      this.youtubeURL = ''
     }
   }
 }

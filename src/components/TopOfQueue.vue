@@ -1,31 +1,26 @@
 <template>
   <v-container>
-    <v-layout>
-      <iframe class="embededVideo" width="879" height="494" :src="topOfQueue" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    <v-layout class="layout" v-if="topOfQueue">
+      <iframe class="embededVideo" width="879" height="494" :src="topOfQueue.url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      <div class="video-info">
+        <h1 id="title" >{{ topOfQueue.title }}</h1>
+        <h3 id="queued-by" class="font-weight-light">QUEUED BY:</h3>
+      </div>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   name: 'top-of-queue',
-  data () {
-    return {
-      topOfQueue: ''
-    }
-  },
-  computed: {
-    ...mapState({youtubeEmbedLink: 'topOfQueue'}),
-  },
-  watch: {
-    youtubeEmbedLink (val) {
-      this.topOfQueue = val
-    }
-  },
+  props: [
+    'topOfQueue'
+  ]
 }
 </script>
 
-<style>
-
+<style scoped>
+.video-info {
+  margin: 1%;
+}
 </style>

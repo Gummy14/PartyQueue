@@ -5,18 +5,22 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    topOfQueue: ''
+    apiKey: 'AIzaSyDB-sUiK5Ya_g40zT-ttN_r76OyXSfdlf4',
+    queue: []
   },
   mutations: {
-    setTopOfQueue (state, payload) {
-      state.topOfQueue = payload.TopOfQueue
+    setQueue (state, payload) {
+      state.queue = payload.Queue
     }
   },
   actions: {
   },
   getters: {
-    getTopOfQueue (state) {
-      return state.topOfQueue
+    getApiKey (state) {
+      return state.apiKey
+    },
+    getQueue (state) {
+      return state.queue
     }
   }
 })

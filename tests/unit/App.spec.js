@@ -19,18 +19,20 @@ describe('App.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       state: {
-        topOfQueue: ''
+        apiKey: 'AIzaSyDB-sUiK5Ya_g40zT-ttN_r76OyXSfdlf4',
+        queue: []
       },
       mutations: {
-        setTopOfQueue (state, payload) {
-          state.topOfQueue = payload.TopOfQueue
+        setQueue (state, payload) {
+          state.queue = payload.Queue
         }
       },
-      actions: {
-      },
       getters: {
-        getTopOfQueue (state) {
-          return state.topOfQueue
+        getApiKey (state) {
+          return state.apiKey
+        },
+        getQueue (state) {
+          return state.queue
         }
       }
     })
@@ -49,17 +51,42 @@ describe('App.vue', () => {
       expect(wrapper.find('.home').exists()).to.be.true
     })
   })
-  context('loadURL', () => {
-    context('when the add to queue button is clicked', () => {
-      it('calls the loadURL method', () => {
-        sinon.spy(subject, 'loadURL')
-        wrapper.find('.add-to-queue').vm.$emit('click')
-        expect(subject.loadURL).to.have.been.called
+  context('when the add to queue button is clicked', () => {
+    it('calls the addVideoToQueue method', () => {
+      sinon.spy(subject, 'addVideoToQueue')
+      wrapper.find('.add-to-queue').vm.$emit('click')
+      expect(subject.addVideoToQueue).to.have.been.called
+    })
+    context.skip('queue is empty', () => {
+      it('adds the video object to the queue with autoplay', () => {
+        subject.youtubeURL = 'https://www.youtube.com/watch?v=D8Ymd-OCucs'
+        subject.addVideoToQueue()
+        expect(store.state.queue).to.deep.equal([{
+            title: 'Lorde - Tennis Court',
+            url: 'https://www.youtube.com/embed/D8Ymd-OCucs?autoplay=1'
+        }])
       })
-      it('saves the url to the store', () => {
-        subject.youtubeURL = 'https://www.youtube.com/watch?v=m6sYFUTDiT4'
-        subject.loadURL()
-        expect(store.state.topOfQueue).to.be.equal('https://www.youtube.com/embed/m6sYFUTDiT4?autoplay=1')
+    })
+    context.skip('queue is not empty', () => {
+      it('adds the object to the queue without autoplay', () => {
+        store.state.queue = [{
+          title: 'Lorde - Tennis Court',
+          url: 'https://www.youtube.com/embed/D8Ymd-OCucs?autoplay=1'
+        }]
+        subject.queue = [{
+          title: 'Lorde - Tennis Court',
+          url: 'https://www.youtube.com/embed/D8Ymd-OCucs?autoplay=1'
+        }]
+        subject.youtubeURL = 'https://www.youtube.com/watch?v=KD_JMQI-4Xw'
+        subject.addVideoToQueue()
+        expect(store.state.queue).to.deep.equal([{
+          title: 'Lorde - Tennis Court',
+          url: 'https://www.youtube.com/embed/D8Ymd-OCucs?autoplay=1'
+        },
+        {
+          title: 'Zac Brown Band - From Now On (Official Lyric Video)',
+          url: 'https://www.youtube.com/embed/KD_JMQI-4Xw'
+        }])
       })
     })
   })
