@@ -50,15 +50,8 @@ export default {
 
       var youtubeEmbedTemplate = 'https://www.youtube.com/embed/'
       var youtubeVideoID = this.youtubeURL.substring(32,43)
-      var autoplay
 
-      if(queue.length === 0) {
-        autoplay = '?autoplay=1'
-      } else {
-        autoplay = ''
-      }
-
-      var newQueueURL = youtubeEmbedTemplate.concat(youtubeVideoID.concat(autoplay))
+      var newQueueURL = youtubeEmbedTemplate.concat(youtubeVideoID)
 
       GetTitle({
         apiKey: this.$store.getters.getApiKey,
@@ -68,6 +61,7 @@ export default {
         this.videoTitle = response
 
         var newQueueObject = {
+          videoId: youtubeVideoID,
           url: newQueueURL,
           title: this.videoTitle
         }
