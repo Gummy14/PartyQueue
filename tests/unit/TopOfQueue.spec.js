@@ -70,7 +70,7 @@ describe('TopOfQueue.vue', () => {
       })
     })
   })
-  context.skip('removeFromTopOfQueue', () => {
+  context('removeFromTopOfQueue', () => {
     it('removes the first item from the queue', () => {
       store.state.queue = [{
         title: 'Lorde - Tennis Court',
@@ -82,7 +82,7 @@ describe('TopOfQueue.vue', () => {
         url: 'https://www.youtube.com/embed/3DGdtKWLNaA',
         videoId: '3DGdtKWLNaA'
       }]
-      subject.removeFromTopOfQueue
+      subject.removeFromTopOfQueue()
       expect(store.state.queue).to.deep.equal([{
         title: 'Red Cold Rover',
         url: 'https://www.youtube.com/embed/3DGdtKWLNaA',
