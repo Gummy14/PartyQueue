@@ -21,11 +21,9 @@ describe('QueueList.vue', () => {
     beforeEach(() => {
       subject.queue = [{
         title: 'Zac Brown Band - From Now On (Official Lyric Video)',
-        url: 'https://www.youtube.com/watch?v=KD_JMQI-4Xw'
       },
       {
         title: 'Ed Sheeran - Galway Girl [Official Lyric Video]',
-        url: 'https://www.youtube.com/watch?v=XjHr-6Zl5P8'
       }]
     })
     it('renders all the videos in the queue', () => {

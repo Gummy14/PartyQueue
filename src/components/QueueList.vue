@@ -2,7 +2,7 @@
   <div>
     <v-card raised class="queue" v-for="video in queue" :key="video">
       <span class="video-card">
-        <iframe class="embededVideo" width="439" height="247" :src="video.url" frameborder="0" allow="accelerometer; gyroscope"></iframe>
+        <img :src="video.thumbnail" width="439" height="247">
         <div class="video-info">
           <h1 id="title">{{ video.title }}</h1>
           <h3 id="queued-by" class="font-weight-light">QUEUED BY: </h3>

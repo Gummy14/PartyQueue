@@ -50,43 +50,11 @@ describe('App.vue', () => {
     it('renders home component', () => {
       expect(wrapper.find('.home').exists()).to.be.true
     })
-  })
-  context('when the add to queue button is clicked', () => {
-    it('calls the addVideoToQueue method', () => {
-      sinon.spy(subject, 'addVideoToQueue')
-      wrapper.find('.add-to-queue').vm.$emit('click')
-      expect(subject.addVideoToQueue).to.have.been.called
-    })
-    context.skip('queue is empty', () => {
-      it('adds the video object to the queue with autoplay', () => {
-        subject.youtubeURL = 'https://www.youtube.com/watch?v=D8Ymd-OCucs'
-        subject.addVideoToQueue()
-        expect(store.state.queue).to.deep.equal([{
-            title: 'Lorde - Tennis Court',
-            url: 'https://www.youtube.com/embed/D8Ymd-OCucs?autoplay=1'
-        }])
-      })
-    })
-    context.skip('queue is not empty', () => {
-      it('adds the object to the queue without autoplay', () => {
-        store.state.queue = [{
-          title: 'Lorde - Tennis Court',
-          url: 'https://www.youtube.com/embed/D8Ymd-OCucs?autoplay=1'
-        }]
-        subject.queue = [{
-          title: 'Lorde - Tennis Court',
-          url: 'https://www.youtube.com/embed/D8Ymd-OCucs?autoplay=1'
-        }]
-        subject.youtubeURL = 'https://www.youtube.com/watch?v=KD_JMQI-4Xw'
-        subject.addVideoToQueue()
-        expect(store.state.queue).to.deep.equal([{
-          title: 'Lorde - Tennis Court',
-          url: 'https://www.youtube.com/embed/D8Ymd-OCucs?autoplay=1'
-        },
-        {
-          title: 'Zac Brown Band - From Now On (Official Lyric Video)',
-          url: 'https://www.youtube.com/embed/KD_JMQI-4Xw'
-        }])
+    context('search button is clicked', () => {
+      it('calls search method', () => {
+        sinon.spy(subject, 'search')
+        wrapper.find('.add-to-queue').vm.$emit('click')
+        expect(subject.search).to.have.been.called
       })
     })
   })

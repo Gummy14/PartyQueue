@@ -1,5 +1,5 @@
 let axios = require('axios')
-let BASE_URL = 'https://www.googleapis.com/youtube/v3/videos'
+let BASE_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 module.exports = function (options, callback) {
   if(!options.apiKey) {
@@ -9,13 +9,13 @@ module.exports = function (options, callback) {
     params: {
       part: 'snippet',
       key: options.apiKey,
-      id: options.videoId,
-      fields: 'items/snippet/title'
+      q: options.searchQuery,
+      type: 'video'
     } 
   })
   .then(response => {
     if(callback) {
-      callback(response.data.items[0].snippet.title)
+      callback(response.data.items)
     }
   })
   .catch(error => {

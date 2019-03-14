@@ -7,11 +7,11 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field
-        placeholder="Enter a YouTube URL"
-        v-model="youtubeURL"
-        @keypress.native.enter="addVideoToQueue()"
+        placeholder="Search"
+        v-model="query"
+        @keypress.native.enter="search()"
       ></v-text-field>
-      <v-btn class="add-to-queue" v-on:click="addVideoToQueue()" :loading="isLoading">Add To Queue</v-btn>
+      <v-btn class="add-to-queue" v-on:click="search()" :loading="isLoading">Search</v-btn>
       <v-spacer></v-spacer>
       <v-btn
         flat
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import GetTitle from './components/GetTitle'
+import GetSearchResults from './components/GetSearchResults'
 import Home from './components/Home'
 export default {
   name: 'App',
@@ -40,41 +40,23 @@ export default {
     return {
       youtubeURL: '',
       isLoading: false,
-      videoTitle: ''
+      videoTitle: '',
+      query: ''
     }
   },
   methods: {
-    addVideoToQueue () {
-      this.isLoading = true
-      var queue = this.$store.getters.getQueue
-
-      var youtubeEmbedTemplate = 'https://www.youtube.com/embed/'
-      var youtubeVideoID = this.youtubeURL.substring(32,43)
-
-      var newQueueURL = youtubeEmbedTemplate.concat(youtubeVideoID)
-
-      GetTitle({
-        apiKey: this.$store.getters.getApiKey,
-        videoId: youtubeVideoID
-      }, 
-      response => {
-        this.videoTitle = response
-
-        var newQueueObject = {
-          videoId: youtubeVideoID,
-          url: newQueueURL,
-          title: this.videoTitle
-        }
-
-        queue.push(newQueueObject)
-      
-        this.$store.commit('setQueue', {
-          Queue: queue
+    search () {
+      if (this.query !== '') {
+        GetSearchResults({
+          apiKey: this.$store.getters.getApiKey,
+          searchQuery: this.query
+        }, response => {
+          this.$store.commit('setSearchResults', {
+            SearchResults: response
+          })
+          this.query = ''
         })
-        
-        this.isLoading = false
-        this.youtubeURL = ''
-      })
+      }
     }
   }
 }
