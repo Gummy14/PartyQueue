@@ -31,6 +31,7 @@
 <script>
 import GetSearchResults from './components/GetSearchResults'
 import Home from './components/Home'
+import { db } from '../firebaseConfig'
 export default {
   name: 'App',
   components: {
@@ -58,6 +59,14 @@ export default {
         })
       }
     }
+  },
+  mounted () { 
+    var self = this
+    db.collection('queues').doc('queueDoc').onSnapshot(function (doc) {
+      self.$store.commit('setQueue', {
+        Queue: doc.data().queue
+      })
+    })
   }
 }
 </script>

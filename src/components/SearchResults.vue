@@ -13,6 +13,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { db } from '../../firebaseConfig'
 export default {
   name: 'search-results',
   computed: {
@@ -33,6 +34,9 @@ export default {
       this.$store.commit('setQueue', {
         Queue: queue
       })
+      
+      db.collection('queues').doc('queueDoc').update({queue: queue})
+
       this.$store.commit('setSearchResults', {
         SearchResults: []
       })

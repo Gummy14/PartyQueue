@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { db } from '../../firebaseConfig'
 export default {
   name: 'top-of-queue',
   props: [
@@ -24,6 +25,8 @@ export default {
       this.$store.commit('setQueue', {
         Queue: queue
       })
+
+      db.collection('queues').doc('queueDoc').update({queue: queue})
     }
   }
 }

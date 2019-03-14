@@ -21,7 +21,7 @@ export default {
   name: 'home',
   components: {
     TopOfQueue,
-    QueueList,
+    QueueList, 
     SearchResults
   },
   computed: {
