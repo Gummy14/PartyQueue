@@ -2,15 +2,15 @@
   <v-container>
     <v-layout v-if="topOfQueue">
       <youtube
-        width="50%"
+        width="100%"
         :video-id="topOfQueue.videoId" 
         :player-vars="{ autoplay: 1 }" 
         @ended="removeFromTopOfQueue"/>
-      <div class="video-info">
+    </v-layout>
+    <div class="video-info">
         <h1 id="title" >{{ topOfQueue.title }}</h1>
         <h3 id="queued-by" class="font-weight-light">QUEUED BY:</h3>
       </div>
-    </v-layout>
   </v-container>
 </template>
 

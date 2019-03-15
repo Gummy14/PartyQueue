@@ -4,6 +4,7 @@
       <top-of-queue class="top-of-queue" :topOfQueue="topOfQueue"></top-of-queue>
     </div>
     <div>
+      <h2 class="up-next">Up Next...</h2>
       <queue-list class="queue-list" :queue="queueWithoutTop"></queue-list>
     </div>
     <div>
@@ -43,8 +44,14 @@ export default {
 </script>
 <style scoped>
 .top-of-queue {
-  padding-left: 1%;
-  margin-left: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+
+  padding-bottom: 10px;
+}
+.up-next {
+  padding-left: 2%;
 }
 </style>
 

@@ -3,15 +3,8 @@
     <v-toolbar class="toolbar" app>
       <v-toolbar-title class="headline text-uppercase">
         <span>PARTY</span>
-        <span class="font-weight-light">QUEUE</span>
+        <span class="font-weight-light">Q</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-text-field
-        placeholder="Search"
-        v-model="query"
-        @keypress.native.enter="search()"
-      ></v-text-field>
-      <v-btn class="add-to-queue" v-on:click="search()" :loading="isLoading">Search</v-btn>
       <v-spacer></v-spacer>
       <v-btn
         flat
@@ -20,6 +13,14 @@
       >
         <span class="mr-2">Latest Release</span>
       </v-btn>
+      <template v-slot:extension>
+      <v-text-field
+        placeholder="Search"
+        v-model="query"
+        @keypress.native.enter="search()"
+      ></v-text-field>
+      <v-btn class="add-to-queue" v-on:click="search()" :loading="isLoading">Search</v-btn>
+      </template>
     </v-toolbar>
 
     <v-content>
