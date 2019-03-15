@@ -28,6 +28,9 @@ export default new Vuex.Store({
     },
     getSearchResults (state) {
       return state.searchResults
-    }
+    },
+    getTopOfQueue (state) {
+      return state.queue[0]
+    },
   }
 })

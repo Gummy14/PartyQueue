@@ -4,7 +4,7 @@
       <top-of-queue class="top-of-queue" :topOfQueue="topOfQueue"></top-of-queue>
     </div>
     <div>
-      <h2 class="up-next">Up Next...</h2>
+      <h2 class="up-next" v-if="queueWithoutTop.length > 0">Up Next...</h2>
       <queue-list class="queue-list" :queue="queueWithoutTop"></queue-list>
     </div>
     <div>

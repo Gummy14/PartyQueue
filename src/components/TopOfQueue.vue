@@ -8,9 +8,8 @@
         @ended="removeFromTopOfQueue"/>
     </v-layout>
     <div class="video-info">
-        <h1 id="title" >{{ topOfQueue.title }}</h1>
-        <h3 id="queued-by" class="font-weight-light">QUEUED BY:</h3>
-      </div>
+      <h3 id="queued-by" class="font-weight-light">QUEUED BY:</h3>
+    </div>
   </v-container>
 </template>
 
@@ -37,6 +36,10 @@ export default {
 </script>
 
 <style scoped>
+#title {
+  padding-top: 1%;
+  padding-left: 1%;
+}
 .video-info {
   margin: 1%;
 }

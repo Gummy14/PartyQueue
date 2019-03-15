@@ -1,25 +1,20 @@
 <template>
   <v-app dark>
-    <v-toolbar class="toolbar" app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>PARTY</span>
-        <span class="font-weight-light">Q</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-      <template v-slot:extension>
+    <v-toolbar class="toolbar" absolute app>
+      <span class="roomQ">
+        <v-toolbar-title class="headline text-uppercase">
+          <span>ROOM</span>
+          <span class="font-weight-light">Q</span>
+        </v-toolbar-title>
+      </span>
       <v-text-field
         placeholder="Search"
         v-model="query"
         @keypress.native.enter="search()"
       ></v-text-field>
       <v-btn class="add-to-queue" v-on:click="search()" :loading="isLoading">Search</v-btn>
+      <template v-slot:extension scroll-off-screen="true" v-if="queue[0]">
+        <h2 id="title" class="font-weight-light">{{ queue[0].title }}</h2>
       </template>
     </v-toolbar>
 
@@ -33,6 +28,7 @@
 import GetSearchResults from './components/GetSearchResults'
 import Home from './components/Home'
 import { db } from '../firebaseConfig'
+import { mapState } from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -68,6 +64,14 @@ export default {
         Queue: doc.data().queue
       })
     })
+  },
+  computed: {
+    ...mapState({queue: 'queue'})
   }
 }
 </script>
+<style scoped>
+.roomQ {
+  margin-right: 2%;
+}
+</style>

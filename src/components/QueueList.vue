@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card raised class="queue" v-for="video in queue" :key="video">
+    <v-card raised class="queue" v-for="video in queue" :key="video.videoId">
       <span class="video-card">
         <img :src="video.thumbnail" width="100%" height="247">
       </span>
