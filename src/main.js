@@ -4,10 +4,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Vuex from 'vuex'
-import VueYouTubeEmbed from 'vue-youtube-embed'
+import VueYouTube from 'vue-youtube'
 const fb = require('../firebaseConfig.js')
 
-Vue.use(VueYouTubeEmbed)
+Vue.use(VueYouTube)
+
 Vue.use(Vuex)
 
 Vue.config.productionTip = false
