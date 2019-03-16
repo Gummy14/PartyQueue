@@ -2,12 +2,12 @@
   <div>
     <v-card raised class="queue" v-for="video in queue" :key="video.videoId">
       <span class="video-card">
-        <img :src="video.thumbnail" width="100%" height="247">
-      </span>
-      <div class="video-info">
-          <h1 id="title">{{ video.title }}</h1>
+        <img :src="video.thumbnail" width="33%" height="100%">
+        <div class="video-info">
+          <h2 id="title" class="font-weight-light">{{ video.title }}</h2>
           <h3 id="queued-by" class="font-weight-light">QUEUED BY: </h3>
         </div>
+      </span>
     </v-card>
   </div>
 </template>

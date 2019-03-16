@@ -20,6 +20,9 @@
 
     <v-content>
       <Home class="home"></Home>
+      <v-dialog v-model="isSearching">
+        <search-results class="search-results" @finishedSearching="isSearching=false"></search-results>
+      </v-dialog>
     </v-content>
   </v-app>
 </template>
@@ -27,23 +30,27 @@
 <script>
 import GetSearchResults from './components/GetSearchResults'
 import Home from './components/Home'
+import SearchResults from './components/SearchResults'
 import { db } from '../firebaseConfig'
 import { mapState } from 'vuex'
 export default {
   name: 'App',
   components: {
-    Home
+    Home,
+    SearchResults
   },
   data () {
     return {
       youtubeURL: '',
       isLoading: false,
       videoTitle: '',
-      query: ''
+      query: '',
+      isSearching: false
     }
   },
   methods: {
     search () {
+      this.isSearching = true
       if (this.query !== '') {
         GetSearchResults({
           apiKey: this.$store.getters.getApiKey,
@@ -67,10 +74,22 @@ export default {
   },
   computed: {
     ...mapState({queue: 'queue'})
+  },
+  watch: {
+    isSearching (val) {
+      if (!val)  {
+        this.$store.commit('setSearchResults', {
+          SearchResults: []
+        })
+      }
+    }
   }
 }
 </script>
 <style scoped>
+#title {
+  padding-bottom: 2.5%;
+}
 .roomQ {
   margin-right: 2%;
 }

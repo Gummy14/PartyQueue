@@ -2,9 +2,9 @@
   <div>
     <v-card raised hover class="queue" v-for="video in searchResults" :key="video.id.videoId" v-on:click="addVideoToQueue(video)">
       <span class="video-card">
-        <img :src="video.snippet.thumbnails.high.url" width="439" height="247">
+        <img :src="video.snippet.thumbnails.high.url" width="33%" height="100%">
         <div class="video-info">
-          <h1 id="title">{{ video.snippet.title }}</h1>
+          <h2 id="title" class="font-weight-light">{{ video.snippet.title }}</h2>
         </div>
       </span>
     </v-card>
@@ -40,6 +40,8 @@ export default {
       this.$store.commit('setSearchResults', {
         SearchResults: []
       })
+
+      this.$emit('finishedSearching')
     }
   }
 }

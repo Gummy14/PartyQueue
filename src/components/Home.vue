@@ -7,23 +7,18 @@
       <h2 class="up-next" v-if="queueWithoutTop.length > 0">Up Next...</h2>
       <queue-list class="queue-list" :queue="queueWithoutTop"></queue-list>
     </div>
-    <div>
-      <search-results class="search-results"></search-results>
-    </div>
   </div>
 </template>
 
 <script>
 import TopOfQueue from './TopOfQueue'
 import QueueList from './QueueList'
-import SearchResults from './SearchResults'
 import { mapState } from 'vuex'
 export default {
   name: 'home',
   components: {
     TopOfQueue,
-    QueueList, 
-    SearchResults
+    QueueList
   },
   computed: {
     ...mapState({queue: 'queue'}),
