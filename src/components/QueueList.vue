@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-card raised class="queue" v-for="video in queue" :key="video">
+    <v-card raised class="queue" v-for="video in queue" :key="video.videoId">
       <span class="video-card">
-        <img :src="video.thumbnail" width="439" height="247">
+        <img :src="video.thumbnail" width="33%" height="100%">
         <div class="video-info">
-          <h1 id="title">{{ video.title }}</h1>
+          <h2 id="title" class="font-weight-light">{{ video.title }}</h2>
           <h3 id="queued-by" class="font-weight-light">QUEUED BY: </h3>
         </div>
       </span>
@@ -23,8 +23,9 @@ export default {
 </script>
 <style scoped>
 .queue {
-  margin-left: 1%;
-  margin-bottom: 1%; 
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%; 
 }
 .video-card {
   display: flex;

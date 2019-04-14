@@ -31,8 +31,5 @@ export {
     db,
     auth,
     currentUser,
-    usersCollection,
-    postsCollection,
-    commentsCollection,
-    likesCollection
+    queuesCollection
 }

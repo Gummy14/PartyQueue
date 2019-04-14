@@ -1,12 +1,16 @@
 <template>
   <v-container>
-    <v-layout class="layout" v-if="topOfQueue">
-      <youtube class="embededVideo" :video-id="topOfQueue.videoId" :player-vars="{ autoplay: 1 }" @ended="removeFromTopOfQueue"></youtube>
-      <div class="video-info">
-        <h1 id="title" >{{ topOfQueue.title }}</h1>
-        <h3 id="queued-by" class="font-weight-light">QUEUED BY:</h3>
-      </div>
-    </v-layout>
+    <div v-if="topOfQueue">
+      <youtube
+        width="100%"
+        :height="videoHeight"
+        :video-id="topOfQueue.videoId" 
+        :player-vars="{ autoplay: 1 }" 
+        @ended="removeFromTopOfQueue"/>
+    </div>
+    <div class="video-info">
+      <h3 id="queued-by" class="font-weight-light">QUEUED BY:</h3>
+    </div>
   </v-container>
 </template>
 
@@ -28,11 +32,20 @@ export default {
 
       db.collection('queues').doc('queueDoc').update({queue: queue})
     }
+  },
+  computed: {
+    videoHeight () {
+      return window.innerWidth*.5625
+    }
   }
 }
 </script>
 
 <style scoped>
+#title {
+  padding-top: 1%;
+  padding-left: 1%;
+}
 .video-info {
   margin: 1%;
 }

@@ -41,6 +41,9 @@ describe('App.vue', () => {
   })
 
   describe('template', () => {
+    it('renders nav drawer component', () => {
+      expect(wrapper.find('.nav-drawer').exists()).to.be.true
+    })
     it('renders toolbar component', () => {
       expect(wrapper.find('.toolbar').exists()).to.be.true
     })

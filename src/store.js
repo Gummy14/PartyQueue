@@ -5,7 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    apiKey: 'AIzaSyDB-sUiK5Ya_g40zT-ttN_r76OyXSfdlf4',
+    apiKey: 'AIzaSyDrSeaXt35dKhxP1ni3ICIFAf_FaqVkHxU',
+    apiKeyList: [
+      'AIzaSyDrSeaXt35dKhxP1ni3ICIFAf_FaqVkHxU',
+      'AIzaSyDYgRSUwq9UVLz4fhWCfTdKgNJEcZjNAdQ',
+      'AIzaSyD0pTKL9yLJ622YXFatnHqh_6JtNzd4ID8'
+    ],
+    apiKeyPosition: 0,
     queue: [],
     searchResults: []
   },
@@ -15,6 +21,12 @@ export default new Vuex.Store({
     },
     setSearchResults (state, payload) {
       state.searchResults = payload.SearchResults
+    },
+    setApiKey (state, payload) {
+      state.apiKey = payload.ApiKey
+    },
+    setApiKeyPosition (state, payload) {
+      state.apiKeyPosition = payload.ApiKeyPosition
     }
   },
   actions: {
@@ -28,6 +40,15 @@ export default new Vuex.Store({
     },
     getSearchResults (state) {
       return state.searchResults
+    },
+    getTopOfQueue (state) {
+      return state.queue[0]
+    },
+    getApiKeyList (state) {
+      return state.apiKeyList
+    },
+    getApiKeyPosition (state) {
+      return state.apiKeyPosition
     }
   }
 })
